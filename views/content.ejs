@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: sans-serif;
+    }
+</style>
+<body>
+    <div style="color: black;" class="container" contenteditable="true">
+        <%- content %>
+    </div>
+    <script>
+        let para = document.querySelector(".container");
+        let typingTimer;
+        const debounceDelay = 2000;
+        const routeName = "<%= route %>"
+
+        para.addEventListener("input",()=>{
+            clearTimeout(typingTimer); 
+            typingTimer = setTimeout(()=>{
+                const newContent = para.innerHTML;
+                return saving(newContent)
+            },debounceDelay)
+        })
+
+        function saving(content){
+            fetch("/save",{
+                method: "post",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body:JSON.stringify({content,routeName})
+            })
+            .then(res => res.json())  // convert to json object form
+        }
+
+    </script>
+</body>
+</html>
