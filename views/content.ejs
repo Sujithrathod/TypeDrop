@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TypeDrop</title>
+    <link rel="icon" type="image/png" href="logo-png.png" style="border-radius: 50%" >
 </head>
 <style>
     body{
         font-family: sans-serif;
+    }
+    .container{
+        caret-color: black;
     }
 </style>
 <body>
@@ -15,6 +19,11 @@
         <%- content %>
     </div>
     <script>
+        
+        window.onload = function() {
+            document.querySelector(".container").focus();
+          };
+
         let para = document.querySelector(".container");
         let typingTimer;
         const debounceDelay = 2000;

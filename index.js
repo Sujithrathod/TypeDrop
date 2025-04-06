@@ -17,6 +17,7 @@ app.set("views",path.join(__dirname,"views"));
 
 // middlewares
 app.use(express.json());
+app.use(express.static("public"));
 
 const port = 3000;
 
