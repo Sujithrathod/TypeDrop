@@ -42,7 +42,7 @@ app.get("/content" ,async(req,res)=>{
             route : route,
             content : ""
         })
-        res.render("home",{message:"Enter again"});
+        res.render("home",{message:"Enter Again To Login"});
     }else{
         res.render("content",{content : found.content,route: route})
     }
