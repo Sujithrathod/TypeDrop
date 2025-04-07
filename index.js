@@ -32,20 +32,18 @@ app.get("/",(req,res)=>{
 
 app.get("/content" ,async(req,res)=>{
     let {route} = req.query;
-
+    let created;
     const found = await RouteModle.findOne({
         route : route
     })
 
     if(!found){
-        RouteModle.insertOne({
+        created = RouteModle.insertOne({
             route : route,
             content : ""
         })
-        res.render("home",{message:"Enter Again To Login"});
-    }else{
-        res.render("content",{content : found.content,route: route})
     }
+    found ? res.render("content", {content : found.content,route : route}) : res.render("content", {content : created.content,route : route})
 });
 
 
